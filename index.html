@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./CSS/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body onload="onInit()">
+    <div class="screen" onclick="onToggleMenu()"></div>
+    <header>
+        <div class="header-content flex main-layout">
+            <div class="logo">MemeGen<span>!</span></div>
+            <ul class="navigation-bar clean-list flex main-nav">
+                <li class="nav-opt" data-page="gallary" onclick="onChangePage(this)">Gallary</li>
+                <li class="nav-opt" data-page="memes" onclick="onChangePage(this)">Memes</li>
+                <li class="nav-opt" data-page="about" onclick="onChangePage(this)">About</li>
+            </ul>
+            <button class="nav-btn hidden" onclick="onToggleMenu()">
+                <div class="fa fa-bars"></div>
+            </button>
+            <button class="close-nav-btn hidden" onclick="onToggleMenu()">X</button>
+        </div>
+    </header>
+
+    <main class="">
+        <section class="main-layout canvas-page flex align-center justify-center hidden" data-page="canvas">
+            <div class="canvas-container">
+                <canvas onclick="onClickCanvas(this)" class="my-canvas" height="500" width="500"></canvas>
+            </div>
+            <div class="editor-grid-container flex align-center justify-center">
+                <div class="editor grid align-center justify-center">
+                    <input type="text" name="txt-input" class="txt-input" oninput="onUpdateTxt()"
+                        placeholder="enter text">
+                    <button onclick="onAddLine()" class="add-line fa fa-plus"></button>
+                    <button onclick="onRemoveLine()" class="delete-line fa fa-trash"></button>
+                    <button onclick="onSwitchLine()" class="switch fa fa-exchange"></button>
+                    <button onclick="onChangeLocation(this)" data-diff="-1" class="txt-up fa fa-level-up-alt">▲</button>
+                    <button onclick="onChangeLocation(this)" data-diff="1"
+                        class="txt-down fa fa-level-up-alt">▼</button>
+
+                    <div class="font-grid-container">
+                        <div class="font-controller grid">
+                            <button onclick="onChangeFontSize(this.data-diff)" data-diff="1"
+                                class="font-up font-btn">A+</button>
+                            <button onclick="onChangeFontSize(this)" data-diff="-1"
+                                class="font-down font-btn">A<span>-</span></button>
+                            <button data-align="left" class="txt-left fa fa-align-left font-btn"
+                                onclick="onAlignTxt(this)"></button>
+                            <button data-align="right" class="txt-right fa fa-align-right font-btn"
+                                onclick="onAlignTxt(this)">‎</button>
+                            <button data-align="center" class="txt-center fa fa-align-center font-btn"
+                                onclick="onAlignTxt(this)">‎</button>
+                            <div class="stroke-color">
+                                <label for="stroke-color">stroke</label>
+                                <input oninput="onChangeStrokeColor(this)" type="color" name="stroke-color"
+                                    placeholder="Hello">
+                            </div>
+                            <div class="fill-color">
+                                <label for="fill-color">fill</label>
+                                <input oninput="onChangeFillColor(this)" type="color" name="fill-color"
+                                    placeholder="Hello">
+                            </div>
+                            <select onchange="onChangeFontFamily(this)" name="font-family" class="font-family">
+                                <option value="" disabled selected>Font</option>
+                                <option value="impact" style="font-family: impact">Impact</option>
+                                <option value="eurofurence" style="font-family: eurofurence">Eurofurence</option>
+                                <option value="lato" style="font-family: lato">Lato</option>
+                                <option value="ubuntu" style="font-family: ubuntu">Ubuntu</option>
+                                <option value="playfair" style="font-family: playfair">Playfair</option>
+                                <option value="inconsolata" style="font-family:inconsolata">Inconsola</option>
+                                <option value="lobster" style="font-family:lobster">Lobster</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <button class="share final-btn fa fa-share-alt" onclick="onShare(this)"> <span></span> </button>
+                    <button class="save final-btn fa fa-save" onclick="onSave(this)"> <span></span> </button>
+                    <a href="#" class="download final-btn" onclick="onDownload(this)" download="my-img.jpg">
+                        <i class="fa fa-download"></i>
+                    </a>
+
+
+                </div>
+            </div>
+        </section>
+        <section class=" gallary-page justify-center align-center flex-col main-layout" data-page="gallary">
+            <div class="search-bar gallary-layout flex">
+                <div class="search-box flex ">
+                    <input oninput="onSetSearch()" class="search-input " type="text" placeholder="SEARCH ">
+                    <i class="fa fa-search"></i>
+                </div>
+
+
+                <div class="words">
+                    <button class="filter-btn baby" onclick="onFilter('baby')">BABY</button>
+                    <button class="filter-btn politics" onclick="onFilter('politics')">POLITICS</button>
+                    <button class="filter-btn comic" onclick="onFilter('comic')">COMIC</button>
+                    <button class="filter-btn happy" onclick="onFilter('happy')">HAPPY</button>
+                    <button class="filter-btn movie" onclick="onFilter('movie')" >MOVIE</button>
+                </div>
+                <button class="more">More</button>
+            </div>
+
+            <div class="gallary-layout main-layout gallary-images-cont grid">
+            </div>
+        </section>
+
+        <section class="memes-page gallary-page justify-center align-center flex-col main-layout" data-page="memes">
+            <div class="gallary-layout gallary-images-cont grid memes-container">
+            </div>
+        </section>
+
+    </main>
+    <div class="modal hidden">
+
+    </div>
+    <footer class="footer flex">
+        <div class="logo">Memegen<span>!</span></div>
+        <div class="coffe-rights">© caJul21 DeseBezunech</div>
+    </footer>
+
+    <script src="./JS/storage.service.js"></script>
+    <script src="./JS/meme.service.js"></script>
+    <script src="JS/gallery-controller.js"></script>
+    <script src="JS/canvas-controller.js"></script>
+    <script src="JS/main-controller.js"></script>
+</body>
+
